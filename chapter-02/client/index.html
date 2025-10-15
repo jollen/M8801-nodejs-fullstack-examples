@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>Chapter 2 — HTML5 Runtime</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h2>Chapter 2 — HTML5 Runtime Playground</h2>
+    <p class="subtitle">LocalStorage · Geolocation · Notifications · Fetch · Service Worker · WebSocket（可選）</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h3>LocalStorage</h3>
+      <div class="row">
+        <input id="name" placeholder="輸入你的名稱…" />
+        <button id="saveName">儲存</button>
+        <button id="loadName">讀取</button>
+      </div>
+      <p id="nameOut" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h3>Geolocation</h3>
+      <div class="row">
+        <button id="locate">取得座標</button>
+      </div>
+      <p id="geoOut" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h3>Notifications</h3>
+      <div class="row">
+        <button id="notify">顯示通知</button>
+      </div>
+      <p class="muted">需要瀏覽器允許通知權限。</p>
+    </section>
+
+    <section class="card">
+      <h3>Fetch API（同源）</h3>
+      <div class="row">
+        <button id="getTime">GET /api/time</button>
+        <button id="postEcho">POST /api/echo</button>
+      </div>
+      <pre id="fetchOut"></pre>
+    </section>
+
+    <section class="card">
+      <h3>Service Worker（離線快取）</h3>
+      <div class="row">
+        <button id="registerSW">註冊 Service Worker</button>
+        <button id="unregisterSW">解除註冊</button>
+      </div>
+      <p id="swOut" class="muted"></p>
+    </section>
+
+    <section class="card">
+      <h3>WebSocket（可選）</h3>
+      <p class="muted">若你已啟動 Chapter-04 的 ws 伺服器（ws://localhost:8080），可在此測試。</p>
+      <div class="row">
+        <button id="wsConnect">連線</button>
+        <input id="wsText" placeholder="輸入訊息…" />
+        <button id="wsSend">送出</button>
+      </div>
+      <pre id="wsOut"></pre>
+    </section>
+  </main>
+
+  <footer>© Chapter 2 Example</footer>
+  <script src="app.js"></script>
+</body>
+</html>

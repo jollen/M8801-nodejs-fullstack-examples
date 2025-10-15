@@ -1,0 +1,14 @@
+{
+  "name": "chapter-08-express-pug",
+  "version": "1.0.0",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "pug": "^3.0.2",
+    "morgan": "^1.10.0"
+  }
+}

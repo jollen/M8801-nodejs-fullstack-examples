@@ -1,0 +1,13 @@
+{
+  "name": "chapter-07-nonblocking-io",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node 1-callbacks.js",
+    "promises": "node 2-promises.js",
+    "await": "node 3-async-await.js",
+    "streams": "node 4-streams.js",
+    "concur": "node 5-concurrency.js",
+    "errors": "node 6-error-bubbles.js"
+  }
+}

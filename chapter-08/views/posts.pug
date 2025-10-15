@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  form#create(method="post", action="/posts")
+    div
+      label 標題：
+      input(type="text", name="title", required=true)
+    div
+      label 內容：
+      textarea(name="body", rows="3", required=true)
+    div
+      button(type="submit") 新增貼文
+
+  if posts && posts.length
+    h3 貼文列表
+    each post in posts
+      article.card
+        h4= post.title
+        p= post.body
+  else
+    p 尚無貼文

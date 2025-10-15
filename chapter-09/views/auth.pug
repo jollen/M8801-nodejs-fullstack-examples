@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  if error
+    p.alert= error
+  form(method="post", action="/auth")
+    div
+      label 密碼：
+      input(type="password", name="password", required=true)
+    div
+      button(type="submit") 登入
+  p 小技巧：可在網址列用 query 測試：
+    code /secure?password=letmein

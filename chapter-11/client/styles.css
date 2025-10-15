@@ -1,0 +1,8 @@
+body{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;max-width:900px;margin:24px auto;padding:0 12px}
+header .subtitle{color:#666}
+section{margin:12px 0}
+.composer input{min-width:320px}
+#status{margin-left:8px;color:#999}
+.errors{background:#ffe9e9;border:1px solid #e8b3b3;color:#7a1f1f;padding:8px;border-radius:6px}
+button{cursor:pointer}
+pre{min-height:220px;border:1px solid #ddd;padding:8px;border-radius:6px;background:#fafafa;overflow:auto}

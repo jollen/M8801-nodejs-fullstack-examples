@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>Chapter 10 — REST × 三層架構</title>
+  <style>body{font-family:system-ui, -apple-system, "Noto Sans TC", sans-serif; max-width:840px; margin:24px auto}</style>
+</head>
+<body>
+  <h2>Chapter 10 — REST × 三層架構（Router / Controller / Service）</h2>
+  <p>此頁面用同源 fetch 呼叫 <code>/api/v1/discussions</code>。</p>
+
+  <section>
+    <input id="msg" placeholder="輸入訊息..." />
+    <button id="send">送出</button>
+    <button id="load">讀取最新 5 筆 (JSON)</button>
+    <button id="loadTxt">讀取最新 5 筆 (text/plain)</button>
+    <pre id="out" style="min-height:160px;border:1px solid #ddd;padding:8px;"></pre>
+  </section>
+
+<script>
+async function createOne(message){
+  const r = await fetch('/api/v1/discussions', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ message })
+  });
+  return await r.json();
+}
+
+async function loadLatest(n, asText=false){
+  const url = asText ? `/api/v1/discussions?limit=${n}&format=txt` : `/api/v1/discussions?limit=${n}`;
+  const r = await fetch(url, { headers: asText ? {'Accept':'text/plain'} : {'Accept':'application/json'} });
+  return asText ? r.text() : r.json();
+}
+
+document.getElementById('send').onclick = async () => {
+  const msg = document.getElementById('msg').value.trim();
+  if (!msg) return;
+  const data = await createOne(msg);
+  alert('已建立 #' + data.id);
+  document.getElementById('msg').value = '';
+};
+
+document.getElementById('load').onclick = async () => {
+  const data = await loadLatest(5, false);
+  document.getElementById('out').textContent = JSON.stringify(data, null, 2);
+};
+
+document.getElementById('loadTxt').onclick = async () => {
+  const data = await loadLatest(5, true);
+  document.getElementById('out').textContent = data;
+};
+</script>
+</body>
+</html>

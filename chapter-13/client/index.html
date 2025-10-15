@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>Chapter 13 — MongoDB × Mongoose</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>body{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;max-width:900px;margin:24px auto}</style>
+</head>
+<body>
+  <h2>Chapter 13 — MongoDB × Mongoose（持久化 REST）</h2>
+  <p>此頁面呼叫 <code>/api/v1/discussions</code>，後端使用 MongoDB。</p>
+
+  <section>
+    <label>使用者：</label>
+    <input id="user" placeholder="guest" style="min-width:140px">
+    <label>訊息：</label>
+    <input id="msg" placeholder="輸入訊息…" style="min-width:320px">
+    <button id="send">送出</button>
+  </section>
+
+  <section style="margin:12px 0">
+    <button id="load">讀取最新 8 筆（含分頁 skip）</button>
+    <input id="skip" type="number" min="0" value="0" style="width:80px">
+    <pre id="out" style="min-height:220px;border:1px solid #ddd;padding:8px;border-radius:6px;background:#fafafa"></pre>
+  </section>
+
+<script>
+async function createOne(user, message){
+  const r = await fetch('/api/v1/discussions', {
+    method: 'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ user, message })
+  });
+  return r.json();
+}
+async function loadLatest(limit=8, skip=0){
+  const r = await fetch('/api/v1/discussions?limit=' + limit + '&skip=' + skip, {
+    headers:{'Accept':'application/json'}
+  });
+  return r.json();
+}
+document.getElementById('send').onclick = async () => {
+  const user = document.getElementById('user').value.trim() || 'guest';
+  const msg = document.getElementById('msg').value.trim();
+  if (!msg) return;
+  const data = await createOne(user, msg);
+  alert('已建立 #' + data.id);
+  document.getElementById('msg').value='';
+  document.getElementById('load').click();
+};
+document.getElementById('load').onclick = async () => {
+  const skip = parseInt(document.getElementById('skip').value||'0',10);
+  const data = await loadLatest(8, skip);
+  document.getElementById('out').textContent = JSON.stringify(data, null, 2);
+};
+</script>
+</body>
+</html>

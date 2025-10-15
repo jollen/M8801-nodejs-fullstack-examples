@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  if user
+    p 使用者： #{user.name}（#{user.role}）
+  p= message
+  ul
+    li: a(href="/secure/profile") 查看 JSON Profile
+    li: a(href="/secure/boom") 觸發錯誤（交由錯誤中介層）

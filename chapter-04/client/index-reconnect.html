@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>NoChat WS — Reconnect</title>
+  <style>body{font-family:system-ui, -apple-system, "Noto Sans TC", sans-serif; max-width:860px; margin:24px auto}</style>
+</head>
+<body>
+  <h3>NoChat — WebSocket（自動重連 + Rooms）</h3>
+  <p>
+    房間：
+    <select id="room">
+      <option>general</option>
+      <option>trading</option>
+      <option>random</option>
+    </select>
+    使用者：<input id="user" value="guest">
+  </p>
+  <p>
+    <input id="text" placeholder="輸入訊息…" style="min-width:420px">
+    <button id="send">送出</button>
+    <span id="status" style="color:#777"></span>
+  </p>
+  <pre id="out" style="min-height:240px;border:1px solid #ddd;padding:8px;border-radius:6px;background:#fafafa;white-space:pre-wrap"></pre>
+
+<script>
+let ws, backoff = 500;
+const $ = (id)=>document.getElementById(id);
+function log(msg){ $('out').textContent += msg + "\n"; }
+
+function connect(){
+  const room = $('room').value;
+  const url = `ws://localhost:8080/?room=${encodeURIComponent(room)}`;
+  ws = new WebSocket(url);
+
+  ws.onopen = () => { $('status').textContent = `連線成功（房間：${room}）`; backoff = 500; };
+  ws.onclose = () => {
+    $('status').textContent = '連線中斷，將重試…';
+    setTimeout(connect, backoff);
+    backoff = Math.min(backoff * 1.6, 5000);
+  };
+  ws.onerror = () => { $('status').textContent = '錯誤'; };
+  ws.onmessage = (evt) => log('← ' + evt.data);
+}
+
+$('send').onclick = () => {
+  const text = $('text').value.trim();
+  if (!text || !ws || ws.readyState !== WebSocket.OPEN) return;
+  const payload = { type:'message', room:$('room').value, user:$('user').value||'guest', text };
+  ws.send(JSON.stringify(payload));
+  $('text').value = '';
+};
+
+connect();
+</script>
+</body>
+</html>

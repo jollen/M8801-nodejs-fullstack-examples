@@ -1,0 +1,16 @@
+{
+  "name": "chapter-05-lambda-evolution",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node 0-overview.js",
+    "lambda": "node 1-lambda.js",
+    "callbacks": "node 2-callbacks.js",
+    "promises": "node 3-promises.js",
+    "await": "node 4-async-await.js",
+    "curry": "node 5-curry.js",
+    "compose": "node 6-compose.js",
+    "control": "node 7-control.js",
+    "pipeline": "node 8-pipeline.js"
+  }
+}

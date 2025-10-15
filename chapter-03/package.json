@@ -1,0 +1,6 @@
+{
+  "name": "chapter-03-routing",
+  "version": "1.0.1",
+  "type": "commonjs",
+  "scripts": { "start": "node index.js" }
+}

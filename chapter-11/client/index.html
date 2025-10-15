@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <title>Chapter 11 — jQuery × REST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h2>Chapter 11 — jQuery × REST（前端整合）</h2>
+    <p class="subtitle">呼叫 Chapter-10 的 <code>/api/v1/discussions</code>。</p>
+  </header>
+
+  <section class="controls">
+    <label>API Base：</label>
+    <input id="apiBase" type="text" value="http://localhost:3000/api/v1" />
+    <button id="applyBase">套用</button>
+  </section>
+
+  <section class="composer">
+    <input id="msg" placeholder="輸入訊息…" />
+    <button id="send">送出</button>
+    <span id="status"></span>
+  </section>
+
+  <section class="actions">
+    <button id="loadJson">讀取最新 8 筆（JSON）</button>
+    <button id="loadText">讀取最新 8 筆（text/plain）</button>
+    <label><input type="checkbox" id="autoRefresh" /> 每 5 秒自動更新</label>
+  </section>
+
+  <section class="output">
+    <pre id="out"></pre>
+  </section>
+
+  <section class="errors" id="errors" hidden></section>
+
+  <script src="app.js"></script>
+</body>
+</html>
